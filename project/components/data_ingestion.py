@@ -5,6 +5,7 @@ from project.logger import logging
 from project.exception import CustomException
 from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
+from project.components.data_transformation import DataTransformationConfig, DataTransformation
 
 @dataclass
 class DataIngestionConfig:
@@ -20,7 +21,7 @@ class DataIngestion:
         logging.info("Data Ingestion started")
 
         try:
-            df=pd.read_csv("data/auto-mpg[1].csv")
+            df=pd.read_csv("data\stud.csv")
             logging.info("Read the dataset")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
@@ -47,6 +48,14 @@ class DataIngestion:
 
         except Exception as e:
             raise CustomException(e, sys)
+
+if __name__ =="__main__":
+    obj = DataIngestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
+
 
 
 
