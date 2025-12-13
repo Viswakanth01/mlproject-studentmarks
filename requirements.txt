@@ -3,4 +3,5 @@ numpy
 seaborn 
 scikit-learn
 from-root
+flask
 -e .
